@@ -1,0 +1,39 @@
+import { useState, useEffect } from "react";
+
+const useFetchCategories = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    let ignore = false;
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:8081/api/categories");
+        if (!response.ok) {
+          throw new Error("Something went wrong");
+        }
+        const data = await response.json();
+        const categoryList = data.categories;
+        if (!ignore) {
+          setCategories(categoryList);
+        }
+        console.log(categories);
+      } catch (error) {
+        if (!ignore) {
+          setError(error);
+        }
+        console.error("Fetch error:", error);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
+  return { categories };
+};
+
+export default useFetchCategories;
