@@ -25,12 +25,42 @@ const UserInfo = ({ onUserFetch }) => {
   }, []);
 
   return (
-    <div>
-      {userData.length > 0 ? (
-        userData.map((user) => <EachUser key={user._id} user={user} />) // Use _id as key
-      ) : (
-        <p>No User available</p>
-      )}
+    <div className="overflow-x-auto">
+      {/* Table Container */}
+      <table className="min-w-full table-auto border border-gray-500 divide-y divide-gray-300">
+        <thead style={{ backgroundColor: "#00AAF4" }} className="text-white">
+          <tr>
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-b border-gray-500">
+              Name
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-b border-gray-500">
+              Address
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-b border-gray-500">
+              Email
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-b border-gray-500">
+              Orders
+            </th>
+          </tr>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-300">
+          {userData.length > 0 ? (
+            userData.map((user, index) => (
+              <EachUser key={user._id} user={user} index={index} />
+            ))
+          ) : (
+            <tr>
+              <td
+                colSpan="4"
+                className="px-6 py-4 text-sm text-center text-gray-900 border-b border-gray-300"
+              >
+                No users fetched yet
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };
