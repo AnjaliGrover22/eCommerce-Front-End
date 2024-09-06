@@ -5,6 +5,7 @@ import MainLayout from "./components/MainLayout";
 import AllProducts from "./components/AllProducts";
 import useFetchData from "./utils/useFetchProducts";
 import useFetchCategories from "./utils/useFetchCategories";
+import OrderInfo from "./components/OrderInfo";
 import Categories from "./components/Categories";
 import {
   createBrowserRouter,
@@ -47,6 +48,9 @@ const App = () => {
           path="users"
           element={<UserInfo onUserFetch={handleUserFetch} />}
         />
+
+        {/* Route for OrderInfo */}
+        <Route path="orders/user/:userId" element={<OrderInfo />} />
       </Route>
     )
   );
