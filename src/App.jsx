@@ -3,6 +3,7 @@ import MainLayout from "./components/MainLayout";
 import AllProducts from "./components/AllProducts";
 import useFetchData from "./utils/useFetchProducts";
 import useFetchCategories from "./utils/useFetchCategories";
+import Categories from "./components/Categories";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -16,11 +17,14 @@ const App = () => {
     "http://localhost:8081/api/categories"
   );
 
-  console.log("data in App:", categories);
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<MainLayout />}>
+      <Route path="/" element={<MainLayout categories={categories} />}>
         <Route index element={<AllProducts data={data} />} />
+        <Route
+          path="category/:categoryId"
+          element={<Categories categories={categories} />}
+        />
       </Route>
     )
   );
