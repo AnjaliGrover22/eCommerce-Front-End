@@ -5,6 +5,7 @@ import MainLayout from "./components/MainLayout";
 import AllProducts from "./components/AllProducts";
 import useFetchData from "./utils/useFetchProducts";
 import useFetchCategories from "./utils/useFetchCategories";
+import Categories from "./components/Categories";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -33,9 +34,13 @@ const App = () => {
   // Create the router with both routes
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<MainLayout />}>
+      <Route path="/" element={<MainLayout categories={categories} />}>
         {/* Default route (index) for AllProducts */}
         <Route index element={<AllProducts data={products} />} />
+        <Route
+          path="category/:categoryId"
+          element={<Categories categories={categories} />}
+        />
 
         {/* Route for UserInfo */}
         <Route

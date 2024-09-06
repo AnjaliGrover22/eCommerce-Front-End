@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import userpic from "../assets/pictures/5994520.png";
 
-const Header = () => {
+const Header = ({ categories }) => {
   return (
     <header>
       {/* Top bar */}
@@ -39,25 +39,16 @@ const Header = () => {
 
       {/* Navigation bar */}
       <nav className="bg-white border-t border-gray-200 border-b">
-        <ul className="flex justify-between px-80 text-black py-4">
-          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-gradient-to-r from-cyan-500 to-blue-500">
-            <Link to="">Electronics</Link>
-          </li>
-          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-gradient-to-r from-cyan-500 to-blue-500">
-            <Link to="">Clothing</Link>
-          </li>
-          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-gradient-to-r from-cyan-500 to-blue-500">
-            <Link to="">Home Appliances</Link>
-          </li>
-          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-gradient-to-r from-cyan-500 to-blue-500">
-            <Link to="">Books</Link>
-          </li>
-          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-gradient-to-r from-cyan-500 to-blue-500">
-            <Link to="">Toys</Link>
-          </li>
-          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-gradient-to-r from-cyan-500 to-blue-500">
-            <Link to="">Accessories</Link>
-          </li>
+        <ul className="flex justify-between px-80 text-black py-4 flex-wrap">
+          {categories.map((category, index) => (
+            <li
+              key={index}
+              className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-gradient-to-r from-cyan-500 to-blue-500"
+            >
+              {/* Make sure the link points to the right route */}
+              <Link to={`/category/${category._id}`}>{category.name}</Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>
