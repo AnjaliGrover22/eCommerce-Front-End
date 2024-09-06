@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-const NewProductModal = ({ closeModal, categories }) => {
+const NewProductModal = ({
+  closeModal,
+  categories,
+  setProducts,
+  handleProductCreated,
+}) => {
   console.log("hi ffom product creation");
   const [form, setForm] = useState({
     name: "",
@@ -61,6 +66,7 @@ const NewProductModal = ({ closeModal, categories }) => {
 
       const data = await response.json();
       console.log("Product created successfully:", data);
+      handleProductCreated(data);
     } catch (error) {
       console.error("Error creating product:", error);
     }

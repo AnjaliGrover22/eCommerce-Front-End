@@ -22,10 +22,6 @@ const App = () => {
     setUsers(data);
   };
 
-  // Fetch products and categories using custom hooks
-  const { data: products } = useFetchData(
-    "https://localhost:8081/api/products"
-  );
   const { categories } = useFetchCategories(
     "http://localhost:8081/api/categories"
   );
@@ -36,7 +32,7 @@ const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<MainLayout categories={categories} />}>
-        <Route index element={<AllProducts data={products} />} />
+        <Route index element={<AllProducts />} />
         <Route
           path="category/:categoryId"
           element={<Categories categories={categories} />}
