@@ -30,7 +30,7 @@ const Header = ({ categories }) => {
 
         <div className="flex space-x-4 items-center">
           <img src={userpic} alt="users" className="h-8" />
-          <Link to="" className="text-cyan-500">
+          <Link to="/users" className="text-cyan-500">
             Users/Orders
           </Link>
           {/* Add more icons if necessary */}
