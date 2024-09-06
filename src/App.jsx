@@ -13,33 +13,35 @@ import {
 } from "react-router-dom";
 
 const App = () => {
-  const [users, setUsers] = useState([]); //State to hold the fetched users
+  const [users, setUsers] = useState([]); // State to hold the fetched users
 
-  //Function to handle the data fetched by UserInfo
+  // Function to handle the data fetched by UserInfo
   const handleUserFetch = (data) => {
     setUsers(data);
   };
+
+  // Fetch products and categories using custom hooks
+  const { data: products } = useFetchData(
+    "https://localhost:8081/api/products"
+  );
+  const { categories } = useFetchCategories(
+    "http://localhost:8081/api/categories"
+  );
+
+  console.log("Fetched categories in App:", categories);
+
+  // Create the router with both routes
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<MainLayout />}>
         {/* Default route (index) for AllProducts */}
-        <Route index element={""} />
+        <Route index element={<AllProducts data={products} />} />
 
         {/* Route for UserInfo */}
         <Route
           path="users"
           element={<UserInfo onUserFetch={handleUserFetch} />}
         />
-  const { data } = useFetchData("https://localhost:8081/api/products");
-  const { categories } = useFetchCategories(
-    "http://localhost:8081/api/categories"
-  );
-
-  console.log("data in App:", categories);
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<AllProducts data={data} />} />
       </Route>
     )
   );
