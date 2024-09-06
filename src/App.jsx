@@ -7,6 +7,7 @@ import useFetchData from "./utils/useFetchProducts";
 import useFetchCategories from "./utils/useFetchCategories";
 import OrderInfo from "./components/OrderInfo";
 import Categories from "./components/Categories";
+import ProductDetails from "./components/ProductDetails";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -37,6 +38,7 @@ const App = () => {
           path="category/:categoryId"
           element={<Categories categories={categories} />}
         />
+        <Route path="product/:productId" element={<ProductDetails />} />
 
         <Route
           path="users"

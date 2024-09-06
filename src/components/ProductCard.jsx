@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
             {product.price}
           </div>
           <button className="py-2 px-4 bg-white text-sky-600 rounded-full border border-sky-500 hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:text-white">
-            <Link to="">Details</Link>
+            <Link to={`/product/${product._id}`}>Details</Link>
           </button>
         </div>
       </div>
