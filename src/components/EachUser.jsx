@@ -10,7 +10,7 @@ const EachUser = ({ user }) => {
       <td className="px-6 py-4 text-sm text-gray-900">{user.email}</td>
       <td className="px-6 py-4 text-sm text-gray-900">
         <Link
-          to={""} // Assuming you want to navigate to a detailed page for the user
+          to={`/orders/user/${user._id}`} // Assuming you want to navigate to a detailed page for the user
           className="inline-block px-4 py-2 text-white bg-custom-blue rounded hover:bg-blue-600"
         >
           Details

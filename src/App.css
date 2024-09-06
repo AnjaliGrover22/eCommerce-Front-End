@@ -1,0 +1,18 @@
+.heading {
+  position: relative;
+}
+
+.heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  height: 2px; /* Adjust thickness as needed */
+  background-color: #00aaf4; /* Tailwind’s blue-500 color */
+  transition: width 0.3s ease;
+}
+
+.heading:hover::after {
+  width: 100%;
+}
