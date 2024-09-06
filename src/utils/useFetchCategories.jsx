@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useFetchCategories = () => {
+const useFetchCategories = (url) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const useFetchCategories = () => {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [url]);
 
   return { categories };
 };

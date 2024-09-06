@@ -1,41 +1,25 @@
 import { useEffect, useState } from "react";
 
-const useFetchData = () => {
+const useFetchData = (url) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    let ignore = false;
-
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8081/api/products");
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error("Something went wrong");
         }
-        const data = await response.json();
-        //console.log("first data received:", data);
-        // console.log("In object data:", data.products);
-        const products = data.products;
-        //console.log("Products in object:", products);
-        if (!ignore) {
-          setData(products);
-        }
-        console.log(data);
+        const result = await response.json();
+        setData(result.products || []);
       } catch (error) {
-        if (!ignore) {
-          setError(error);
-        }
-        // console.error("Fetch error:", error);
+        setError(error);
       }
     };
 
     fetchData();
-
-    return () => {
-      ignore = true;
-    };
-  }, []);
+  }, [url]);
 
   return { data, error };
 };
