@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const ProductCard = ({ product }) => {
   return (
     <div className="card bg-white w-96 hover:shadow-xl border border-gray-200 hover:border-sky-500">
@@ -8,8 +10,11 @@ const ProductCard = ({ product }) => {
         <h2 className="card-title">{product.name}</h2>
         <p>{product.description}</p>
         <div className="card-actions justify-end">
-          <button className="py-2 px-4 bg-sky-600 text-white rounded-full">
+          <div className="py-2 px-4 bg-sky-600 text-white rounded-full">
             {product.price}
+          </div>
+          <button className="py-2 px-4 bg-white text-sky-600 rounded-full border border-sky-500 hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:text-white">
+            <Link to="">Details</Link>
           </button>
         </div>
       </div>

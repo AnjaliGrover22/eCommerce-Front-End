@@ -16,7 +16,9 @@ const Header = () => {
 
       {/* Main header */}
       <div className="flex justify-between items-center py-4 px-14 bg-white shadow-md">
-        <div className="text-2xl font-bold text-sky-500">MagicShop</div>
+        <div className="text-2xl font-bold text-sky-500">
+          <Link to="/">MagicShop</Link>
+        </div>
 
         <div className=" mx-6">
           <input
@@ -38,22 +40,22 @@ const Header = () => {
       {/* Navigation bar */}
       <nav className="bg-white border-t border-gray-200 border-b">
         <ul className="flex justify-between px-80 text-black py-4">
-          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-sky-500">
+          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-gradient-to-r from-cyan-500 to-blue-500">
             <Link to="">Electronics</Link>
           </li>
-          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-sky-500">
+          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-gradient-to-r from-cyan-500 to-blue-500">
             <Link to="">Clothing</Link>
           </li>
-          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-sky-500">
+          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-gradient-to-r from-cyan-500 to-blue-500">
             <Link to="">Home Appliances</Link>
           </li>
-          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-sky-500">
+          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-gradient-to-r from-cyan-500 to-blue-500">
             <Link to="">Books</Link>
           </li>
-          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-sky-500">
+          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-gradient-to-r from-cyan-500 to-blue-500">
             <Link to="">Toys</Link>
           </li>
-          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-sky-500">
+          <li className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-gradient-to-r from-cyan-500 to-blue-500">
             <Link to="">Accessories</Link>
           </li>
         </ul>
