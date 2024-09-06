@@ -19,10 +19,18 @@ const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<UserInfo onUserFetch={handleUserFetch} />} />
+        {/* Default route (index) for AllProducts */}
+        <Route index element={""} />
+
+        {/* Route for UserInfo */}
+        <Route
+          path="users"
+          element={<UserInfo onUserFetch={handleUserFetch} />}
+        />
       </Route>
     )
   );
+
   return <RouterProvider router={router} />;
 };
 
