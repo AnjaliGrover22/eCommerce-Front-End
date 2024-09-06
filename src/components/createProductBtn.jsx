@@ -1,13 +1,14 @@
 import React from "react";
 
-const createProductBtn = () => {
+const CreateProductBtn = ({ openModal }) => {
   return (
-    <div className="absolute">
-      <button className="py-2 px-4 bg-white text-sky-600 rounded-full border border-sky-500 hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:text-white">
-        Create Product
-      </button>
-    </div>
+    <button
+      onClick={openModal}
+      className="py-2 px-4 bg-sky-600 text-white rounded-full border border-white hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:text-white fixed bottom-12 right-12"
+    >
+      Create Product
+    </button>
   );
 };
 
-export default createProductBtn;
+export default CreateProductBtn;
