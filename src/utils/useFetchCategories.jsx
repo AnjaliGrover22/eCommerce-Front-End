@@ -17,7 +17,7 @@ const useFetchCategories = (url) => {
         if (!ignore) {
           setCategories(categoryList);
         }
-        console.log(categories);
+        //console.log(categories);
       } catch (error) {
         if (!ignore) {
           setError(error);

@@ -27,7 +27,7 @@ const App = () => {
     "http://localhost:8081/api/categories"
   );
 
-  console.log("Fetched categories in App:", categories);
+  //console.log("Fetched categories in App:", categories);
 
   // Create the router with both routes
   const router = createBrowserRouter(
