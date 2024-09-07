@@ -5,14 +5,22 @@ import Footer from "./Footer";
 import CreateProductBtn from "./createProductBtn";
 import NewProductModal from "./newProductModal";
 import useFetchData from "../utils/useFetchProducts";
+import useFetchCategories from "../utils/useFetchCategories";
 
-const MainLayout = ({ categories }) => {
+const MainLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [products, setProducts] = useState([]);
+  const [cats, setCats] = useState([]);
 
   const { data: fetchedProducts } = useFetchData(
     "http://localhost:8081/api/products"
   );
+
+  const { categories: fetchedCats } = useFetchCategories(
+    "http://localhost:8081/api/categories"
+  );
+
+  console.log("Fetch Categories:", fetchedCats);
 
   useEffect(() => {
     //console.log("Fetched Products:", fetchedProducts); // Check the fetched data
@@ -20,6 +28,15 @@ const MainLayout = ({ categories }) => {
       setProducts(fetchedProducts);
     }
   }, [fetchedProducts]);
+
+  useEffect(() => {
+    console.log("Fetched Categories:", fetchedCats); // Log fetchedCats
+    if (fetchedCats) {
+      setCats(fetchedCats);
+    }
+  }, [fetchedCats]);
+
+  console.log("Cats in MainLayout:", cats); // Log cats before passing to Header
 
   const openModal = () => {
     setIsOpen(true);
@@ -38,18 +55,18 @@ const MainLayout = ({ categories }) => {
 
   return (
     <div>
-      <Header categories={categories} />
-      <Outlet context={{ products, setProducts }} />
+      <Header categories={cats} />
+      <Outlet context={{ products, setProducts, cats, setCats }} />
       <CreateProductBtn openModal={openModal} />
       {isOpen && (
         <NewProductModal
           closeModal={closeModal}
-          categories={categories}
+          categories={cats}
           setProducts={setProducts}
           handleProductCreated={handleProductCreated}
         />
       )}
-      <Footer categories={categories} />
+      <Footer categories={cats} />
     </div>
   );
 };

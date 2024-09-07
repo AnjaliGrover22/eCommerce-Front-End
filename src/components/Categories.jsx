@@ -1,11 +1,13 @@
 import React from "react";
 import ProductCard from "./ProductCard";
 import { useParams } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 
-const Categories = ({ categories }) => {
+const Categories = () => {
+  const { cats } = useOutletContext();
   //console.log(categories);
   const { categoryId } = useParams();
-  const selectedCategory = categories.find((cat) => cat._id === categoryId);
+  const selectedCategory = cats.find((cat) => cat._id === categoryId);
   //console.log("selected category:", selectedCategory);
   if (!selectedCategory) {
     return <p>Category not found</p>;
