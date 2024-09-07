@@ -43,7 +43,7 @@ const Header = ({ categories }) => {
           {categories.map((category, index) => (
             <li
               key={index}
-              className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-sky-500 focus:bg-gradient-to-r from-cyan-500 to-blue-500"
+              className="hover:text-white bg-cyan-100 px-8 py-2 rounded-full hover:bg-gradient-to-r from-cyan-500 to-blue-500 "
             >
               {/* Make sure the link points to the right route */}
               <Link to={`/category/${category._id}`}>{category.name}</Link>

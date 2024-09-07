@@ -8,13 +8,15 @@ const ProductCard = ({ product }) => {
       </figure>
       <div className="card-body bg-white rounded-b-2xl">
         <h2 className="card-title">{product.name}</h2>
-        <p>{product.description}</p>
+        <p className="text-ellipsis overflow-hidden whitespace-nowrap max-h-28">
+          {product.description}
+        </p>
         <div className="card-actions justify-end">
           <div className="py-2 px-4 bg-sky-600 text-white rounded-full">
-            {product.price}
+            {product.price}€
           </div>
           <button className="py-2 px-4 bg-white text-sky-600 rounded-full border border-sky-500 hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:text-white">
-            <Link to="">Details</Link>
+            <Link to={`/product/${product._id}`}>Details</Link>
           </button>
         </div>
       </div>
