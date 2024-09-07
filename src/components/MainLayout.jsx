@@ -15,7 +15,7 @@ const MainLayout = ({ categories }) => {
   );
 
   useEffect(() => {
-    console.log("Fetched Products:", fetchedProducts); // Check the fetched data
+    //console.log("Fetched Products:", fetchedProducts); // Check the fetched data
     if (fetchedProducts) {
       setProducts(fetchedProducts);
     }

@@ -3,10 +3,10 @@ import ProductCard from "./ProductCard";
 import { useParams } from "react-router-dom";
 
 const Categories = ({ categories }) => {
-  console.log(categories);
+  //console.log(categories);
   const { categoryId } = useParams();
   const selectedCategory = categories.find((cat) => cat._id === categoryId);
-  console.log("selected category:", selectedCategory);
+  //console.log("selected category:", selectedCategory);
   if (!selectedCategory) {
     return <p>Category not found</p>;
   }
