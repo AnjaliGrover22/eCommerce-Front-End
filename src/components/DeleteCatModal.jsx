@@ -22,12 +22,19 @@ const DeleteCatModal = ({ closeModal }) => {
           body: JSON.stringify({ categoryId }),
         }
       );
+
+      if (response.status === 409) {
+        closeModal();
+        return alert("Category can´t be deleted cause it contains products!");
+      }
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
       console.log("Response from delete:", data);
+
       setCats((prevCats) => prevCats.filter((cat) => cat._id !== categoryId));
     } catch (error) {
       console.error("Error deleting product:", error);
