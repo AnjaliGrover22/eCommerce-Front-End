@@ -3,7 +3,7 @@ import { useState } from "react";
 import UserInfo from "./components/UserInfo";
 import MainLayout from "./components/MainLayout";
 import AllProducts from "./components/AllProducts";
-import useFetchData from "./utils/useFetchProducts";
+import { useOutletContext } from "react-router-dom";
 import useFetchCategories from "./utils/useFetchCategories";
 import OrderInfo from "./components/OrderInfo";
 import Categories from "./components/Categories";
@@ -23,21 +23,12 @@ const App = () => {
     setUsers(data);
   };
 
-  const { categories } = useFetchCategories(
-    "http://localhost:8081/api/categories"
-  );
-
-  console.log("Fetched categories in App:", categories);
-
   // Create the router with both routes
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<MainLayout categories={categories} />}>
+      <Route path="/" element={<MainLayout />}>
         <Route index element={<AllProducts />} />
-        <Route
-          path="category/:categoryId"
-          element={<Categories categories={categories} />}
-        />
+        <Route path="category/:categoryId" element={<Categories />} />
         <Route path="product/:productId" element={<ProductDetails />} />
 
         <Route
