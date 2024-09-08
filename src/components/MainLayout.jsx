@@ -50,6 +50,16 @@ const MainLayout = () => {
   const handleProductCreated = (response) => {
     if (response && response.product) {
       setProducts((prevProducts) => [...prevProducts, response.product]);
+      const updateCats = cats.map((category) => {
+        if (response.product.category.includes(category._id)) {
+          return {
+            ...category,
+            products: [...category.products, response.product],
+          };
+        }
+        return category; //return category unchanged if its doesnt match with any of the categories of the new product
+      });
+      setCats(updateCats);
     }
   };
 
