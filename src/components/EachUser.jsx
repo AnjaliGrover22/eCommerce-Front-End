@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const EachUser = ({ user }) => {
+const EachUser = ({ user, deleteUser }) => {
   return (
     <tr className="odd:bg-gray-100 even:bg-white">
       <td className="px-6 py-4 text-sm text-gray-900 capitalize">
@@ -15,6 +15,15 @@ const EachUser = ({ user }) => {
         >
           Details
         </Link>
+      </td>
+      {/* Button to trigger delete functionality */}
+      <td className="px-6 py-4 text-sm text-gray-900">
+        <button
+          onClick={() => deleteUser(user._id)} // Call the deleteUser function with the user ID
+          className="inline-block px-4 py-2 text-white  bg-custom-blue rounded hover:bg-blue-600"
+        >
+          Delete
+        </button>
       </td>
     </tr>
   );
