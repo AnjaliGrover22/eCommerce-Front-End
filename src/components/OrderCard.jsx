@@ -11,7 +11,7 @@ const OrderCard = ({ order }) => {
         <p>{order.description}</p>
         <div className="card-actions justify-end">
           <div className="py-2 px-4 bg-sky-600 text-white rounded-full">
-            {order.price}
+            <span>{order.quantity}</span> {order.price}
           </div>
           {/* <button className="py-2 px-4 bg-white text-sky-600 rounded-full border border-sky-500 hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:text-white">
             <Link to="">Details</Link>
