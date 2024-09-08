@@ -6,9 +6,12 @@ import CreateProductBtn from "./createProductBtn";
 import NewProductModal from "./newProductModal";
 import useFetchData from "../utils/useFetchProducts";
 import useFetchCategories from "../utils/useFetchCategories";
+import CreateCategoryBtn from "./CreateCategoryBtn";
+import NewCategoryModal from "./NewCategoryModal";
 
 const MainLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [products, setProducts] = useState([]);
   const [cats, setCats] = useState([]);
 
@@ -36,14 +39,25 @@ const MainLayout = () => {
     }
   }, [fetchedCats]);
 
-  console.log("Cats in MainLayout:", cats); // Log cats before passing to Header
+  //console.log("Cats in MainLayout:", cats); // Log cats before passing to Header
 
-  const openModal = () => {
+  //toggle new product modal
+  const openProductModal = () => {
     setIsOpen(true);
   };
 
-  const closeModal = () => {
+  const closeProductModal = () => {
     setIsOpen(false);
+  };
+
+  //toggle new category modal
+  const openCategoryModal = () => {
+    setIsCategoryOpen(true);
+    //  console.log("Its true");
+  };
+
+  const closeCategoryModal = () => {
+    setIsCategoryOpen(false);
   };
 
   // Function to handle adding a new product
@@ -67,13 +81,21 @@ const MainLayout = () => {
     <div>
       <Header categories={cats} />
       <Outlet context={{ products, setProducts, cats, setCats }} />
-      <CreateProductBtn openModal={openModal} />
+      <CreateProductBtn openModal={openProductModal} />
       {isOpen && (
         <NewProductModal
-          closeModal={closeModal}
+          closeModal={closeProductModal}
           categories={cats}
           setProducts={setProducts}
           handleProductCreated={handleProductCreated}
+        />
+      )}
+      <CreateCategoryBtn openModal={openCategoryModal} />
+      {isCategoryOpen && (
+        <NewCategoryModal
+          closeModal={closeCategoryModal}
+          cats={cats}
+          setCats={setCats}
         />
       )}
       <Footer categories={cats} />
