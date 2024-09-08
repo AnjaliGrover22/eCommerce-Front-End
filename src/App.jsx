@@ -23,8 +23,6 @@ const App = () => {
     setUsers(data);
   };
 
-  //console.log("Fetched categories in App:", categories);
-
   // Create the router with both routes
   const router = createBrowserRouter(
     createRoutesFromElements(
