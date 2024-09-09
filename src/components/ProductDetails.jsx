@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import ProductCard from "./ProductCard";
+import EditProductModal from "./EditProductModal";
 
 const ProductDetails = () => {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { products } = useOutletContext();
   const { productId } = useParams(); // Fix: invoke useParams
@@ -29,6 +31,13 @@ const ProductDetails = () => {
       prod.category && // Ensure prod.category exists before accessing it
       prod.category.some((cat) => selectedCategories.includes(cat.name))
   );
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -73,7 +82,10 @@ const ProductDetails = () => {
               <button className="w-full py-2 bg-pink-500 text-white rounded-lg hover:bg-gradient-to-tr from-purple-500 to-pink-500">
                 Delete
               </button>
-              <button className="w-full py-2 bg-sky-600 text-white rounded-lg hover:bg-gradient-to-tr from-cyan-500 to-blue-500">
+              <button
+                className="w-full py-2 bg-sky-600 text-white rounded-lg hover:bg-gradient-to-tr from-cyan-500 to-blue-500"
+                onClick={openModal}
+              >
                 Edit
               </button>
             </div>
@@ -110,6 +122,12 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+      {isOpen && (
+        <EditProductModal
+          selectedProduct={selectedProduct}
+          closeModal={closeModal}
+        />
+      )}
     </>
   );
 };

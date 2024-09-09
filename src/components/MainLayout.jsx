@@ -23,7 +23,7 @@ const MainLayout = () => {
     "http://localhost:8081/api/categories"
   );
 
-  console.log("Fetch Categories:", fetchedCats);
+  //console.log("Fetch Categories:", fetchedCats);
 
   useEffect(() => {
     //console.log("Fetched Products:", fetchedProducts); // Check the fetched data
@@ -33,7 +33,7 @@ const MainLayout = () => {
   }, [fetchedProducts]);
 
   useEffect(() => {
-    console.log("Fetched Categories:", fetchedCats); // Log fetchedCats
+    // console.log("Fetched Categories:", fetchedCats); // Log fetchedCats
     if (fetchedCats) {
       setCats(fetchedCats);
     }
