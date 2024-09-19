@@ -12,7 +12,9 @@ const NewCategoryModal = ({ closeModal, cats, setCats }) => {
     e.preventDefault();
     try {
       const response = await fetch(
+
         "http://ecommerce-api-k4pz.onrender.com/api/categories",
+
         {
           headers: {
             Accept: "application/json",
