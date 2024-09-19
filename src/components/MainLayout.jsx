@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import CreateProductBtn from "./createProductBtn";
-import NewProductModal from "./newProductModal";
+import NewProductModal from "./NewProductModal";
 import useFetchData from "../utils/useFetchProducts";
 import useFetchCategories from "../utils/useFetchCategories";
 import CreateCategoryBtn from "./CreateCategoryBtn";
