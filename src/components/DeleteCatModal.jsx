@@ -12,7 +12,7 @@ const DeleteCatModal = ({ closeModal }) => {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8081/api/categories/${categoryId}`,
+        `http://ecommerce-api-k4pz.onrender.com/api/categories/${categoryId}`,
         {
           headers: {
             Accept: "application/json",

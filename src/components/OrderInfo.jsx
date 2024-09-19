@@ -13,7 +13,7 @@ const OrderInfo = () => {
   const fetchOrderData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8081/api/orders/user/${userId}`
+        `http://ecommerce-api-k4pz.onrender.com/api/orders/user/${userId}`
       );
       const result = await response.json();
       console.log("API result:", result);

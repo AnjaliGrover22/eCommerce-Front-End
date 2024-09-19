@@ -16,11 +16,11 @@ const MainLayout = () => {
   const [cats, setCats] = useState([]);
 
   const { data: fetchedProducts } = useFetchData(
-    "http://localhost:8081/api/products"
+    "https://ecommerce-api-k4pz.onrender.com/api/products"
   );
 
   const { categories: fetchedCats } = useFetchCategories(
-    "http://localhost:8081/api/categories"
+    "https://ecommerce-api-k4pz.onrender.com/api/categories"
   );
 
   //console.log("Fetch Categories:", fetchedCats);

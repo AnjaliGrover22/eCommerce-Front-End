@@ -55,10 +55,13 @@ const NewProductModal = ({
     console.log(form.category);
 
     try {
-      const response = await fetch("http://localhost:8081/api/products", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "http://ecommerce-api-k4pz.onrender.com/api/products",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

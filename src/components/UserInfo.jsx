@@ -8,7 +8,9 @@ const UserInfo = ({ onUserFetch }) => {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch("http://localhost:8081/api/users");
+      const response = await fetch(
+        "http://ecommerce-api-k4pz.onrender.com/api/users"
+      );
       const result = await response.json();
       console.log("userdata", result); // Check this log
       if (result && result.users) {
@@ -34,7 +36,7 @@ const UserInfo = ({ onUserFetch }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:8081/api/users/${userId}`, // Specific user deletion
+        `http://ecommerce-api-k4pz.onrender.com/api/users/${userId}`, // Specific user deletion
         {
           method: "DELETE",
         }
@@ -55,7 +57,7 @@ const UserInfo = ({ onUserFetch }) => {
   const editUser = async (userId, updatedUserData) => {
     try {
       const response = await fetch(
-        `http://localhost:8081/api/users/${userId}`,
+        `http://ecommerce-api-k4pz.onrender.com/api/users/${userId}`,
         {
           method: "PUT",
           headers: {

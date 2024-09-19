@@ -72,7 +72,7 @@ const EditProductModal = ({ selectedProduct, closeModal }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:8081/api/products/${selectedProduct._id}`,
+        `http://ecommerce-api-k4pz.onrender.com/api/products/${selectedProduct._id}`,
         {
           method: "PUT",
           body: formData,
