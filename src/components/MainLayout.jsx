@@ -16,16 +16,14 @@ const MainLayout = () => {
   const [cats, setCats] = useState([]);
 
   const { data: fetchedProducts } = useFetchData(
-
     "https://ecommerce-api-k4pz.onrender.com/api/products"
   );
 
   const { categories: fetchedCats } = useFetchCategories(
     "https://ecommerce-api-k4pz.onrender.com/api/categories"
-
   );
 
-  //console.log("Fetch Categories:", fetchedCats);
+  console.log("Fetch Categories:", fetchedCats);
 
   useEffect(() => {
     //console.log("Fetched Products:", fetchedProducts); // Check the fetched data
