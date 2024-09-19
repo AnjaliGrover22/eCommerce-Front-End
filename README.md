@@ -1,3 +1,6 @@
+Front-end: https://e-commerce-185fdc.netlify.app/
+Backe-end: https://ecommerce-api-k4pz.onrender.com
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
