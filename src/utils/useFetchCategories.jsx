@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 const useFetchCategories = (url) => {
   const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     let ignore = false;
@@ -9,9 +10,7 @@ const useFetchCategories = (url) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-
-          "http://ecommerce-api-k4pz.onrender.com/api/categories"
-
+          "https://ecommerce-api-k4pz.onrender.com/api/categories"
         );
         if (!response.ok) {
           throw new Error("Something went wrong");

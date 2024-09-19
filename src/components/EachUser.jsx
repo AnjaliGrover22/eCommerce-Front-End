@@ -42,7 +42,7 @@ const EachUser = ({ user, deleteUser, editUser }) => {
           >
             <svg
               className="w-4 h-4" // Size of the icon inside the blue background
-              xmlns="http://www.w3.org/2000/svg"
+              xmlns="https://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="none"
             >
