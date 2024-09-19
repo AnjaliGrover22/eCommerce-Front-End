@@ -9,7 +9,9 @@ const useFetchCategories = (url) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://ecommerce-api-62pq.onrender.com/api/categories"
+
+          "http://ecommerce-api-k4pz.onrender.com/api/categories"
+
         );
         if (!response.ok) {
           throw new Error("Something went wrong");

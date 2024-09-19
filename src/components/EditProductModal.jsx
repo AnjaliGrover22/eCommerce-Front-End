@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
-const NewProductModal = ({
-  closeModal,
-  categories,
-  setProducts,
-  handleProductCreated,
-}) => {
-  console.log("hi ffom product creation");
+const EditProductModal = ({ selectedProduct, closeModal }) => {
+  const { products, setProducts, cats, setCats } = useOutletContext();
+
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -14,6 +11,21 @@ const NewProductModal = ({
     price: 0,
     image: null,
   });
+
+  useEffect(() => {
+    if (selectedProduct && selectedProduct.category) {
+      console.log("Selected product categories:", selectedProduct.category);
+      setForm({
+        name: selectedProduct.name,
+        description: selectedProduct.description,
+        category: selectedProduct.category || [],
+        price: selectedProduct.price,
+        image: null,
+      });
+    } else {
+      console.log("Selected product or its categories are not available yet.");
+    }
+  }, [selectedProduct]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,18 +35,22 @@ const NewProductModal = ({
     }));
   };
 
-  const handleCategorySelect = (categoryName) => {
-    if (form.category.includes(categoryName)) {
-      setForm({
-        ...form,
-        category: form.category.filter((cat) => cat !== categoryName),
-      });
+  const handleCategorySelect = (categoryId) => {
+    console.log("Category selected:", categoryId);
+    console.log("Current selected categories:", form.category);
+    if (form.category.includes(categoryId)) {
+      // If the category is already selected, remove it
+      setForm((prev) => ({
+        ...prev,
+        category: prev.category.filter((cat) => cat !== categoryId),
+      }));
     } else if (form.category.length < 3) {
-      setForm({
-        ...form,
-        category: [...form.category, categoryName], // Store the name, not the ID
-      });
-    } else if (form.category.length >= 3) {
+      // Add the category if it's not selected and less than 3 are selected
+      setForm((prev) => ({
+        ...prev,
+        category: [...prev.category, categoryId],
+      }));
+    } else {
       alert("You can only pick up to 3 categories!");
     }
   };
@@ -50,17 +66,15 @@ const NewProductModal = ({
     });
 
     formData.append("price", form.price);
-    formData.append("image", form.image);
-
-    console.log(form.category);
+    if (form.image) {
+      formData.append("image", form.image);
+    }
 
     try {
       const response = await fetch(
-
-        "http://ecommerce-api-k4pz.onrender.com/api/products",
-
+        `http://ecommerce-api-k4pz.onrender.com/api/products/${selectedProduct._id}`,
         {
-          method: "POST",
+          method: "PUT",
           body: formData,
         }
       );
@@ -70,10 +84,38 @@ const NewProductModal = ({
       }
 
       const data = await response.json();
-      console.log("Product created successfully:", data);
-      handleProductCreated(data);
+      console.log("Product uptated successfully:", data);
+      const updatedProduct = data.product;
+
+      setProducts((prev) =>
+        prev.map((prod) =>
+          prod._id === updatedProduct._id ? updatedProduct : prod
+        )
+      );
+
+      setCats((prevCats) =>
+        prevCats.map((cat) => {
+          if (updatedProduct.category.includes(cat._id)) {
+            // Add product to categories where it's included
+            return {
+              ...cat,
+              products: cat.products.includes(updatedProduct._id)
+                ? cat.products
+                : [...cat.products, updatedProduct._id],
+            };
+          } else {
+            // Remove product from categories where it's not included
+            return {
+              ...cat,
+              products: cat.products.filter(
+                (prodId) => prodId !== updatedProduct._id
+              ),
+            };
+          }
+        })
+      );
     } catch (error) {
-      console.error("Error creating product:", error);
+      console.error("Error updating product:", error);
     }
     closeModal();
   };
@@ -98,14 +140,11 @@ const NewProductModal = ({
                     as="h3"
                     className="text-base font-semibold leading-6 text-cyan-500 underline underline-offset-4"
                   >
-                    Create your own Product
+                    Edit your Product
                   </div>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Here you can create you own product and add to to a
-                      collection you want. We recommend picking more than one
-                      category, so that there is a higher chance other users see
-                      it.
+                      Update your product here.
                     </p>
                   </div>
                   <form onSubmit={handleSubmit}>
@@ -118,7 +157,7 @@ const NewProductModal = ({
                           type="text"
                           name="name"
                           id="name"
-                          placeholder="Type your product title..."
+                          placeholder={selectedProduct.name}
                           value={form.name}
                           className=" w-full py-1 px-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-400 bg-cyan-50  "
                           required
@@ -133,7 +172,7 @@ const NewProductModal = ({
                           type="text"
                           name="description"
                           id="description"
-                          placeholder="Describe your product..."
+                          placeholder={selectedProduct.description}
                           value={form.description}
                           className=" w-full py-1 px-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-400 bg-cyan-50  "
                           required
@@ -149,7 +188,7 @@ const NewProductModal = ({
                           name="price"
                           id="price"
                           value={form.price}
-                          placeholder="Euro..."
+                          placeholder={selectedProduct.price}
                           className=" py-1 px-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-400 bg-cyan-50  "
                           onChange={handleChange}
                           required
@@ -160,22 +199,35 @@ const NewProductModal = ({
                           Categories (select up to 3)
                         </label>
                         <div className="flex flex-wrap gap-2">
-                          {categories.map((category) => (
-                            <button
-                              key={category._id}
-                              type="button"
-                              onClick={() =>
-                                handleCategorySelect(category.name)
-                              }
-                              className={`px-3 py-2 rounded-lg ${
-                                form.category.includes(category.name)
-                                  ? "bg-blue-500 text-white"
-                                  : "bg-cyan-100 text-black"
-                              }`}
-                            >
-                              {category.name}
-                            </button>
-                          ))}
+                          {cats.map((category) => {
+                            const isSelected = form.category.includes(
+                              category._id
+                            );
+                            const isDisabled =
+                              !isSelected && form.category.length >= 3; // Disable if not selected and limit is reached
+
+                            return (
+                              <button
+                                key={category._id}
+                                type="button"
+                                onClick={() =>
+                                  handleCategorySelect(category._id)
+                                }
+                                disabled={isDisabled} // Disable the button if not selected and limit is reached
+                                className={`px-3 py-2 rounded-lg ${
+                                  isSelected
+                                    ? "bg-blue-500 text-white"
+                                    : "bg-cyan-100 text-black"
+                                } ${
+                                  isDisabled
+                                    ? "opacity-50 cursor-not-allowed"
+                                    : ""
+                                }`} // Add styles for disabled state
+                              >
+                                {category.name}
+                              </button>
+                            );
+                          })}
                         </div>
                       </div>
                       <div className="mt-4">
@@ -185,7 +237,6 @@ const NewProductModal = ({
                         <input
                           type="file"
                           className="w-full py-1 px-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-400 bg-cyan-50  "
-                          required
                           onChange={(e) =>
                             setForm({ ...form, image: e.target.files[0] })
                           }
@@ -220,4 +271,4 @@ const NewProductModal = ({
   );
 };
 
-export default NewProductModal;
+export default EditProductModal;

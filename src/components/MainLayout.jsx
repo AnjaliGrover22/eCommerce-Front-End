@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import CreateProductBtn from "./createProductBtn";
-import NewProductModal from "./newProductModal";
+import NewProductModal from "./NewProductModal";
 import useFetchData from "../utils/useFetchProducts";
 import useFetchCategories from "../utils/useFetchCategories";
 import CreateCategoryBtn from "./CreateCategoryBtn";
@@ -16,14 +16,16 @@ const MainLayout = () => {
   const [cats, setCats] = useState([]);
 
   const { data: fetchedProducts } = useFetchData(
-    "https://ecommerce-api-62pq.onrender.com/api/products"
+
+    "https://ecommerce-api-k4pz.onrender.com/api/products"
   );
 
   const { categories: fetchedCats } = useFetchCategories(
-    "https://ecommerce-api-62pq.onrender.com/api/categories"
+    "https://ecommerce-api-k4pz.onrender.com/api/categories"
+
   );
 
-  console.log("Fetch Categories:", fetchedCats);
+  //console.log("Fetch Categories:", fetchedCats);
 
   useEffect(() => {
     //console.log("Fetched Products:", fetchedProducts); // Check the fetched data
@@ -33,7 +35,7 @@ const MainLayout = () => {
   }, [fetchedProducts]);
 
   useEffect(() => {
-    console.log("Fetched Categories:", fetchedCats); // Log fetchedCats
+    // console.log("Fetched Categories:", fetchedCats); // Log fetchedCats
     if (fetchedCats) {
       setCats(fetchedCats);
     }
